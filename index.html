@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bryan Weaver - Senior Software Developer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #1a1a1a;
+      --color-secondary: #4a4a4a;
+      --color-accent: #2563eb;
+      --color-muted: #6b7280;
+      --color-border: #e5e7eb;
+      --color-bg: #ffffff;
+      --color-bg-subtle: #f9fafb;
+    }
+
+    @page {
+      size: letter;
+      margin: 0.4in;
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page-break { page-break-before: always; }
+      a { text-decoration: none; }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--color-primary);
+      line-height: 1.5;
+      font-size: 10.5pt;
+      background: #f3f4f6;
+    }
+
+    .resume {
+      max-width: 8.5in;
+      margin: 0 auto;
+      background: var(--color-bg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+
+    @media print {
+      body { background: white; }
+      .resume { box-shadow: none; }
+    }
+
+    /* Header */
+    header {
+      background: var(--color-primary);
+      color: white;
+      padding: 32px 40px 24px;
+    }
+
+    header h1 {
+      font-size: 28pt;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    header .subtitle {
+      font-size: 11pt;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-top: 4px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+      font-size: 9.5pt;
+      color: #d1d5db;
+    }
+
+    .contact-row a {
+      color: #d1d5db;
+      text-decoration: none;
+    }
+
+    .contact-row a:hover {
+      color: white;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .contact-icon {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+
+    /* Main content */
+    main {
+      padding: 28px 40px 32px;
+    }
+
+    /* Section */
+    section {
+      margin-bottom: 22px;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 10pt;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      border-bottom: 2px solid var(--color-accent);
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+
+    /* Summary */
+    .summary p {
+      color: var(--color-secondary);
+      font-size: 10.5pt;
+      line-height: 1.6;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 6px 16px;
+    }
+
+    .skill-label {
+      font-weight: 700;
+      font-size: 9.5pt;
+      color: var(--color-primary);
+      padding-top: 1px;
+    }
+
+    .skill-value {
+      font-size: 9.5pt;
+      color: var(--color-secondary);
+      line-height: 1.5;
+    }
+
+    /* Experience */
+    .job {
+      margin-bottom: 16px;
+    }
+
+    .job:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .job-company {
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .job-dates {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+
+    .job-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-top: 1px;
+    }
+
+    .job-title {
+      font-size: 10pt;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--color-secondary);
+    }
+
+    .job-location {
+      font-size: 9pt;
+      color: var(--color-muted);
+    }
+
+    .job ul {
+      margin-top: 6px;
+      padding-left: 18px;
+    }
+
+    .job li {
+      font-size: 10pt;
+      color: var(--color-secondary);
+      margin-bottom: 3px;
+      line-height: 1.5;
+    }
+
+    .job li::marker {
+      color: var(--color-accent);
+    }
+
+    /* Compact job (older roles) */
+    .job-compact {
+      margin-bottom: 8px;
+    }
+
+    .job-compact .job-header {
+      margin-bottom: 0;
+    }
+
+    .job-compact .job-title {
+      display: inline;
+    }
+
+    .job-compact-desc {
+      font-size: 9.5pt;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+
+    /* Education & Achievements */
+    .edu-row, .achievement-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .edu-degree {
+      font-weight: 700;
+      font-size: 10.5pt;
+    }
+
+    .edu-school {
+      font-size: 10pt;
+      color: var(--color-secondary);
+    }
+
+    .edu-year {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--color-muted);
+    }
+
+    /* Projects */
+    .project {
+      margin-bottom: 12px;
+    }
+
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .project-name {
+      font-size: 11pt;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .project-name a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .project-name a:hover {
+      color: var(--color-accent);
+    }
+
+    .project-tech {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    .project-desc {
+      font-size: 10pt;
+      color: var(--color-secondary);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* Placeholder styles */
+    .placeholder {
+      background: #fef3c7;
+      border: 1px dashed #f59e0b;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 9pt;
+      color: #92400e;
+    }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <header>
+      <h1>Bryan Weaver</h1>
+      <div class="subtitle">Senior Software Developer</div>
+      <div class="contact-row">
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:weaverb9@gmail.com">weaverb9@gmail.com</a>
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          832.883.9424
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Deer Park, TX
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <a href="https://linkedin.com/in/bryanofearth">bryanofearth</a>
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          <a href="https://github.com/bryanweaver">bryanweaver</a>
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <!-- Summary -->
+      <section>
+        <div class="section-title">Summary</div>
+        <div class="summary">
+          <p>Builder and tinkerer with 12+ years shipping production software, now deeply focused on AI-powered tooling and LLM integration. Driven by curiosity about how AI can transform developer workflows — from building internal chat applications and automated code reviewers to designing multi-agent orchestration systems on nights and weekends. Brings a rare combination of hands-on engineering depth, team leadership, and a genuine passion for pushing the boundaries of what AI tools can do.</p>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section>
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-grid">
+          <span class="skill-label">Languages</span>
+          <span class="skill-value">TypeScript, JavaScript, Python, SQL, HTML, CSS</span>
+
+          <span class="skill-label">Frontend</span>
+          <span class="skill-value">React 18/19, Next.js (App Router), Vue 3, Tailwind CSS, shadcn/ui, Radix UI, Redux, Zustand, TanStack Query</span>
+
+          <span class="skill-label">Backend</span>
+          <span class="skill-value">Node.js, Express, Supabase, AWS Lambda, AWS Amplify (AppSync, DynamoDB), Firebase</span>
+
+          <span class="skill-label">Data & AI</span>
+          <span class="skill-value">PostgreSQL, DynamoDB, Anthropic Claude API, OpenAI API, LangChain</span>
+
+          <span class="skill-label">Infrastructure</span>
+          <span class="skill-value">AWS CDK, AWS SAM, GitHub Actions, Vercel, Git, Sentry, Stripe, Capacitor (iOS/Android)</span>
+
+          <span class="skill-label">Testing</span>
+          <span class="skill-value">Vitest, Playwright, Jest, React Testing Library, MSW, Cucumber BDD</span>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section>
+        <div class="section-title">Experience</div>
+
+        <!-- Pennymac -->
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">Pennymac</span>
+            <span class="job-dates">Jun 2022 &mdash; Present</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">Senior Software Developer</span>
+            <span class="job-location">Remote</span>
+          </div>
+          <ul>
+            <li>Self-initiated and built an internal LLM chat application (Next.js + AWS Lambda) and an AI-powered merge request reviewer, now being integrated into the team's CI/CD pipelines — demonstrating how LLMs can meaningfully improve developer velocity.</li>
+            <li>Became the team's go-to resource for AI integration, delivering presentations on prompting techniques and helping engineers adopt LLM tooling in their daily workflows.</li>
+            <li>Maintain 60+ repositories on a small team, shipping full-stack applications with TypeScript, React, Next.js, Python, and AWS (CDK, Lambda, SAM). Interview developer candidates across multiple teams.</li>
+          </ul>
+        </div>
+
+        <!-- Loomis - Manager -->
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">Loomis Armored US</span>
+            <span class="job-dates">Feb 2022 &mdash; Jun 2022</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">IT Development Manager</span>
+            <span class="job-location">Houston, TX</span>
+          </div>
+          <ul>
+            <li>Built a development team from scratch — interviewed, hired, and onboarded 3 engineers, establishing a collaborative culture focused on learning and iterative improvement.</li>
+            <li>Overhauled development processes to increase transparency and accountability, and led remediation of security audit findings across multiple applications.</li>
+          </ul>
+        </div>
+
+        <!-- Loomis - Senior Dev -->
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">Loomis Armored US</span>
+            <span class="job-dates">Mar 2020 &mdash; Feb 2022</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">Senior Software Developer</span>
+            <span class="job-location">Houston, TX</span>
+          </div>
+          <ul>
+            <li>Owned development across 25+ applications, rapidly learning and adapting to codebases ranging from legacy .NET Framework to modern React/Redux front ends.</li>
+            <li>Architected a complex ETL pipeline that delivered major performance gains for enterprise reporting — identifying the bottleneck, designing the solution, and shipping it end-to-end.</li>
+            <li>Introduced clean architecture patterns across all greenfield projects, creating codebases that were easier for the team to understand, test, and extend.</li>
+          </ul>
+        </div>
+
+        <!-- YNET -->
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">YNET Consulting LLC</span>
+            <span class="job-dates">Apr 2018 &mdash; Feb 2020</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">Software Consultant</span>
+            <span class="job-location">Houston, TX</span>
+          </div>
+          <ul>
+            <li>Led design and development of a cross-platform desktop application (Angular, Electron, Cosmos DB) for public school tardy tracking — scoping, architecting, and delivering the full product.</li>
+            <li>Picked up new frameworks rapidly across engagements, shipping production features in Angular, React, and Vue.js for clients in education, events, and health/wellness.</li>
+          </ul>
+        </div>
+
+        <!-- Bryan Weaver of Earth -->
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">Bryan Weaver of Earth</span>
+            <span class="job-dates">Sep 2015 &mdash; Present</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">Owner / Freelance Developer</span>
+            <span class="job-location">Houston, TX</span>
+          </div>
+          <ul>
+            <li>Continuously explore new technologies by building and shipping real products — from AI-powered Next.js applications with Claude and OpenAI APIs to cross-platform mobile apps with Capacitor.</li>
+            <li>Self-taught modern stack end-to-end (Next.js, Supabase, Tailwind, Stripe) through hands-on client projects across hospitality, education, and real estate.</li>
+          </ul>
+        </div>
+
+        <!-- Earlier roles - compact -->
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">We Are Mammoth</span>
+            <span class="job-dates">Apr 2016 &mdash; Apr 2017</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">Product Support & Maintenance Engineer</span>
+            <span class="job-location">Houston, TX</span>
+          </div>
+          <ul>
+            <li>Shipped features and resolved bugs for two SaaS products (DoneDone and KinHR), developing deep empathy for end users through direct customer support and feedback loops.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <span class="job-company">Entrance Consulting</span>
+            <span class="job-dates">Jul 2013 &mdash; Jan 2016</span>
+          </div>
+          <div class="job-meta">
+            <span class="job-title">Software Consultant (Junior &rarr; Associate)</span>
+            <span class="job-location">Houston, TX</span>
+          </div>
+          <ul>
+            <li>Led development of a scholarship management system coordinating millions of dollars in awards — first major ownership experience, learning to navigate ambiguity and deliver independently.</li>
+            <li>Designed and built a barcode-driven pipe tracking module for enterprise software from scratch, earning direct client acclaim as a junior engineer.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section>
+        <div class="section-title">Education</div>
+        <div class="edu-row">
+          <div>
+            <span class="edu-degree">Bachelor of Science, Computer Science</span>
+            <span class="edu-school">&mdash; University of Houston</span>
+          </div>
+          <span class="edu-year">2013</span>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section>
+        <div class="section-title">Projects</div>
+
+        <div class="project">
+          <div class="project-header">
+            <span class="project-name">Mewscast</span>
+            <span class="project-tech">Python &middot; Claude API &middot; Grok API &middot; GitHub Actions</span>
+          </div>
+          <div class="project-desc">Born from curiosity about what Claude can do autonomously. AI-powered news bot that fetches real stories from Google News, generates commentary via Claude, and creates images with Grok — posting 7x daily to X/Twitter and Bluesky. Includes media framing analysis, 4-level deduplication, and a 398-test suite. Runs serverless on GitHub Actions for near-zero cost.</div>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <span class="project-name">Claude Agent Kit</span>
+            <span class="project-tech">Claude Code &middot; AI Agents &middot; Prompt Engineering</span>
+          </div>
+          <div class="project-desc">An experiment in pushing Claude Code's agent capabilities to their limits. Orchestration framework that coordinates specialized sub-agents through custom slash commands, featuring a meta-agent that generates purpose-built agents and a lean 5-agent team for parallel workflows with git-first deployment pipelines.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
